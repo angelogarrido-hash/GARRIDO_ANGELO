@@ -1,5 +1,5 @@
 ---
-title: "RWorksheet_commit.1GARRIDO#2"
+title: "Worksheet#2"
 author: "ANGELO A. GARRIDO"
 date: "2025-09-29"
 output: pdf_document
@@ -7,6 +7,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 #Worksheet #2

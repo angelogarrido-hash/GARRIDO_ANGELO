@@ -41,9 +41,9 @@ city
 temp <- c(42, 39, 34, 34, 30, 27)
 temp
 
-#c. Data Frame City and Temp
-city_temp <- data.frame(city, temp)
-city_temp
+#c.Data Frame City and Temp
+city_temp <- data.frame(city,temp)
+print(city_temp)
 
 #d. Rename the columns using names() function
 names(city_temp) <- c("City", "Temperature")

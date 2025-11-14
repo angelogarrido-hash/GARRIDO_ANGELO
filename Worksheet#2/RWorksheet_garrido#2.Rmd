@@ -185,8 +185,8 @@ pay <- c(67, 90, 225, 110, 90,
          39, 45, 32, 40, 31)
          
 ## Create the data frame
-forbes <- data.frame(rank, name, pay)
-
+forbes <- c(rank, name, pay)
+print(forbes)
 ## Show first few rows
 head(forbes)
 ```

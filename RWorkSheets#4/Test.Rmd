@@ -1,0 +1,76 @@
+---
+title: "Test"
+author: "ANGELO A. GARRIDO"
+date: "2025-11-14"
+output: html_document
+---
+
+```{r}
+#7. Import the alexa-file.xlsx
+alexa_xlsx <- read_excel("alexa-file.xlsx")
+str(alexa_xlsx)
+colnames(alexa_xlsx)
+
+#a. Rename the white and black variants by using gsub() function.
+alexa_xlsx$variation <- gsub("Black\\s+", "Black ", alexa_xlsx$variation)
+alexa_xlsx$variation <- gsub("White\\s+", "White ", alexa_xlsx$variation)
+
+# Snippet of the cleaned variation column
+head(alexa_xlsx$variation)
+
+#b. Getting the total number of each variation and saving it 
+
+library(dplyr)
+
+variations <- alexa_xlsx %>% count(variation)
+variations
+
+save(variations, file = "variations.RData")
+
+#c. Creating a barplot() from variations of Rdata.
+
+load("variations.RData")
+
+barplot(
+  variations$n,
+  names.arg = variations$variation,
+  col = rainbow(length(variations$variation)),
+  main = "Total Number of Alexa Variations",
+  xlab = "  Variation Type  ",
+  ylab = "  Total Count  ",
+  las = 2
+)
+
+#d. Creating barplot() for Black and White variations.
+
+black_var <- subset(variations, grepl("Black", variation))
+white_var <- subset(variations, grepl("White", variation))
+
+par(mfrow = c(1, 2))
+
+# color palette exactly matching number of bars
+black_colors <- c("black", "#FF4040", "#00a8e1", "#54AD56")[1:nrow(black_var)]
+white_colors <- c("black", "#FF4040", "#00a8e1", "#54AD56")[1:nrow(white_var)]
+
+barplot(
+  black_var$n,
+  names.arg = black_var$variation,
+  col = black_colors,
+  main = "Black Variations",
+  xlab = "  Total Numbers  ",
+  ylab = "    Variants  ",
+  las = 2
+)
+
+barplot(
+  white_var$n,
+  names.arg = white_var$variation,
+  col = white_colors,
+  main = "White Variations",
+  xlab = "  Total Numbers  ",
+  ylab = "    Variants  ",
+  las = 2
+)
+
+
+```

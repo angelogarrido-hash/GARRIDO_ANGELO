@@ -109,7 +109,7 @@ HouseholdData <- data.frame(
 HouseholdData
 
 
-write.csv(HouseholdData, file = "HouseholdData.csv", row.names = FALSE)
+write.csv(HouseholdData, file = "HouseholdData.csv", row.names = TRUE )
 
 
 data_set1 <- read.csv("HouseholdData.csv", header = TRUE)

@@ -7,7 +7,6 @@ output: pdf_document
 
 ## 1. Create a data frame using the table below
 ```{r}
-#change
 #a. Write the codes.
 Respondents <- 1:20
 Sex = c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2)

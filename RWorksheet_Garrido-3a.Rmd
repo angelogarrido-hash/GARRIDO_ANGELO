@@ -8,7 +8,7 @@ output: pdf_document
 
 ## 1. There is a built-in vector LETTERS that contains the uppercase letters of the alphabet and letters that contains the lowercase letters of the alphabet.
 ```{r}
-
+#change
 #a. You need to produce a vector that contains the first 11 letters.
 first_El_letters <- LETTERS[1:11]
 first_El_letters

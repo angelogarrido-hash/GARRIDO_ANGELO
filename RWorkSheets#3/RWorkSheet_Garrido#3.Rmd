@@ -1,175 +1,160 @@
 ---
-title: "Worksheet#3a"
-author: "ANGELO A. GARRIDO"
-date: "2025-10-13"
+title: "RWorksheet_Garrido-3a"
+author: "Angelo A. Garrido"
+date: "2025-11-24"
 output: pdf_document
+
 ---
+
+
 ## 1. There is a built-in vector LETTERS that contains the uppercase letters of the alphabet and letters that contains the lowercase letters of the alphabet.
 ```{r}
 #a. You need to produce a vector that contains the first 11 letters.
 first_El_letters <- LETTERS[1:11]
 first_El_letters
+```
 
+```{r}
 #b. Produce a vector that contains the odd-numbered letters
 odd_num_letters <- LETTERS[seq(1, 26, by = 2)]
 odd_num_letters
+```
 
+```{r}
 #c. Produce a vector that contains the vowel
 vowels <- LETTERS[c(1, 5, 9, 15, 21)]
 vowels
 
+```
+
+```{r}
 #d. Produce a vector that contains the last 5 lowercase letters.
 last5 <- letters[22:26]
 last5
 
+```
+
+```{r}
 #e. Produce a vector that contains letters between 15 to 24 (lowercase).
 letters_Between15_24 <- letters[15:24]
 letters_Between15_24
 ```
 
-
-## 2. Create a vector(not a dataframe) with the average temperatures in April for Tugue garao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City. the average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees
-
+## 2. Create a vector(not a dataframe) with the average temperatures in April for                       Tuguegarao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City.                               The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees
 ```{r}
-#a. Character vector for the cities
+#a. What is the R code and its result for creating a character vector for the                           city/town of Tuguegarao City, Manila, Iloilo City, Tacloban,Samal Island, and                             Davao City? Name the object as city. The names should follow the same order as                                in the instruction.
 
 city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
 city
 
-#b. Numeric vector for the temperature
+```
 
-temp <- c(42, 39, 34, 34, 30, 27)
-temp
-
-#c.Data Frame City and Temp
-city_temp <- data.frame(city,temp)
-print(city_temp)
-
-#d. Rename the columns using names() function
-names(city_temp) <- c("City", "Temperature")
-city_temp
-
-#e. Print the structure by using str() function. Describe the output.
-str(city_temp)
-
-#f. Display the content of row 3 and row 4
-city_temp[3, ]
-city_temp[4, ]
-
-#g. Display the city with the highest and lowest temperature
-
-# Highest temperature
-city_temp[which.max(city_temp$Temperature), ]
-
-# Lowest temperature
-city_temp[which.min(city_temp$Temperature), ]
+```{r}
+#b. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.                             Name the object as temp. Write the R code and its output. Numbers should also                               follow what is in the instruction.
+temperature <- c(42, 39, 34, 34, 30, 27)
+temperature
 
 
 ```
-## 2. Create a matrix of one to eight and eleven to fourteen with four columns and threerows.
 
 ```{r}
+#c. Create a dataframe to combine the city and the temp by using ‘data.frame().                             What the R code and its result?
+cities_temperature <- data.frame(City = city, Temperature = temperature)
+cities_temperature
+
+
+
+```
+
+```{r}
+#d. Associate the dataframe you have created in 2.(c) by naming the columns using                           the names() function. Change the column names by using names() function as                                  City and Temperature. What is the R code and its result?
+  
+names(cities_temperature) <- c("City", "Temperature")
+cities_temperature
+
+```
+
+
+## 2. Create a matrix of one to eight and eleven to fourteen with four columns and threerows.
+```{r}
 #a. What will be the R code for the #2 question and its result?
+
 matrix_data <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4)
 matrix_data
 
-#result: matrix has 3 rows and 4 columns.numbers 1 to 8 and 11 to 14 are filled column-wise by default.
+```
 
-
+```{r}
 #b. Multiply the matrix by two. What is its R code and its result
 
 matrix_data * 2
 
-#result: Each Element in the matrix was multiplied by 
+```
 
-
+```{r}
 #c. What is the content of row 2? What is its R code
 
 matrix_data[2, ]
 
-#result: Row 2 contains the values 2, 5, 8, and 13.
+```
 
-
+```{r}
 #d. Display column 3 and column 4 in row 1 and row 2
+
 matrix_data[1:2, 3:4]
+```
 
-#Output: 7, 12
-#        8, 13
-
-
+```{r}
 #e.Display only columns 2 and 3 in row 3
+
 matrix_data[3, 2:3]
 
-#Output: 6,11
+```
 
-
+```{r}
 #f. Display only column 4
+
 matrix_data[, 4]
 
-#Output:[1] 12 13 14
+```
 
-
+```{r}
 #g. Name the rows and columns
 
 matrix_2 <- matrix_data * 2
 rownames(matrix_2) <- c("isa", "dalawa", "tatlo")
 colnames(matrix_2) <- c("uno", "dos", "tres", "quatro")
 matrix_2
+```
 
-#Output: uno dos tres quatro
-#isa       2   8   14     24
-#dalawa    4  10   16     26
-#tatlo     6  12   22     28
-
+```{r}
 #h. Reshaping the Matrix
 
 dim(matrix_data) <- c(6, 2)
 matrix_data
 
-#Output:
-#  1   7
-#  2   8
-#  3   11
-#  4   12
-#  5  `13
-#  6   14
 ```
-## Using Arrays
-## • Array can have more than two dimensions by using the array() function and dim()to specify the dimensions
 
 ## 3. An array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
-
 ```{r}
-#a. Create a three-dimensional array
+#a. Create an array for the above numeric values. Each values will be repeated                            twice    What will be the R code if you are to create a three-dimensional array                             with 4 columns and 2 rows. What will be its output?
+
 array_data <- array(rep(c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1), 2),
                     dim = c(2, 4, 3))
 array_data
-#output: 
+```
 
-
-#     [,1] [,2] [,3] [,4]
-#[1,]    1    3    7    9
-#[2,]    2    6    8    0
-
-#, , 2
-
-#     [,1] [,2] [,3] [,4]
-#[1,]    3    5    1    3
-#[2,]    4    1    2    6
-
-#, , 3
-#     [,1] [,2] [,3] [,4]
-#[1,]    7    9    3    5
-#[2,]    8    0    4    1
-
-
+```{r}
 #b. How many dimensions does the array have?
 
 length(dim(array_data))
-#output: 3
+
+```
 
 
-#c. Name the rows, columns, and array layers
+```{r}
+#c. Name the rows as lowercase letters and columns as uppercase letters starting                            from   the A. The array names should be “1st-Dimensional Array”,                                  “2nd-Dimensional Array”, and  “3rd-Dimensional Array”. What will be the R codes                               and its output?
+
 rownames(array_data) <- c("a", "b")
 colnames(array_data) <- c("A", "B", "C", "D")
 dimnames(array_data) <- list(c("a", "b"),
@@ -178,24 +163,5 @@ dimnames(array_data) <- list(c("a", "b"),
                                "2nd-Dimensional Array",
                                "3rd-Dimensional Array"))
 array_data
-
-#output:
-
-#, , 1st-Dimensional Array
-
-#  A B C D
-#a 1 3 7 9
-#b 2 6 8 0
-
-#, , 2nd-Dimensional Array
-
-#  A B C D
-#a 3 5 1 3
-#b 4 1 2 6
-
-#, , 3rd-Dimensional Array
-
-#  A B C D
-#a 7 9 3 5
-#b 8 0 4 1
 ```
+

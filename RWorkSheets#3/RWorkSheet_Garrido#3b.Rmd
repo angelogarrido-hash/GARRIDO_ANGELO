@@ -1,7 +1,7 @@
 ---
-title: "RWorkSheet_Garrido#3b"
-author: "ANGELO A. GARRIDO"
-date: "2025-10-13"
+title: "RWorksheet_Garrido-3b"
+author: "Angelo A. Garrido"
+date: "2025-11-24"
 output: pdf_document
 ---
 
@@ -13,7 +13,9 @@ Sex = c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2)
 Fathers_Occupation = c(1,3,3,3,1,2,3,1,1,1,3,2,1,3,3,1,3,1,2,1)
 Persons_at_Home = c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6)
 Siblings_at_School = c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2)
+
 Types_of_Houses = c(1,2,3,1,1,3,3,1,2,3,2,3,2,2,3,3,3,3,3,2)
+                    
 respondents_data <- data.frame(
     Respondents,
     Sex,
@@ -23,43 +25,165 @@ respondents_data <- data.frame(
     Types_of_Houses
 )
 
+```
+
+```{r}
 #b. Describe the data. Get the structure or the summary of the data
 respondents_data
 
 str(respondents_data)
 
 summary(respondents_data)
+```
 
-
+```{r}
 #c.Is the mean number of siblings attending is 5?
 mean(Siblings_at_School)
 #2.95, not 5
+```
 
 
+```{r}
 #d. Extract the 1st two rows and then all the columns using the subsetting functions.
 respondents_data[1:2, ]
 respondents_data
+```
 
+```{r}
 #e. Extract 3rd and 5th row with 2nd and 4th column.
 respondents_data[c(3,5), c(2,4)]
 respondents_data
+```
 
-
+```{r}
 #f. Select the variable types of houses then store the vector that results as types_houses.
 types_houses <- respondents_data$Types_of_Houses
 types_houses
+```
 
-
+```{r}
 #g. Select only all Males respondent that their father occupation was farmer.
 all_Males <- subset(respondents_data, Sex == 1 & Fathers_Occupation == 1)
 all_Males
+```
+
+```{r}
+#h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school.
+all_Females <- subset(respondents_data, Sex == 2 & Siblings_at_School >= 5)
+all_Females
+```
+
+## 2. Write a R program to create an empty data frame. Using the following codes:
+
+```{r}
+df = data.frame(Ints=integer(),
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE)
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+
+## 3. Create a .csv file of this. Save it as HouseholdData.csv
+
+```{r}
+Respondents <- 1:10
+Sex <- c("Male", "Female", "Female", "Male", "Male", "Female", "Female", "Male", "Female", "Male")
+Fathers_Occupation <- c(1,2,3,3,1,2,2,3,1,3)
+Persons_at_Home <- c(5,7,3,8,6,4,4,2,11,6)
+Siblings_at_School <- c(2,3,0,5,2,3,1,2,6,2)
+Types_of_Houses <- c("Wood","Congrete","Congrete","Wood","Semi-congrete","Semi-congrete",
+                     "Wood","Semi-congrete","Semi-congrete","Congrete")
+
+HouseholdData <- data.frame(
+  Respondents,
+  Sex,
+  Fathers_Occupation,
+  Persons_at_Home,
+  Siblings_at_School,
+  Types_of_Houses
+)
+
+HouseholdData
 
 
+write.csv(HouseholdData, file = "HouseholdData.csv", row.names = TRUE )
+
+
+data_set1 <- read.csv("HouseholdData.csv", header = TRUE)
+data_set1
+```
+
+```{r}
+#b. Convert the Sex into factor using factor() function and change it into integer.[Legend:
+#Male = 1 and Female = 2]. Write the R codes and its output.
+
+```
+HouseholdData$Sex <- factor(HouseholdData$Sex, levels = c("Male", "Female"),labels = c(1, 2))
+
+```{r}
+#c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
+#= 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
+
+HouseholdData$Types_of_Houses <- factor(HouseholdData$Types_of_Houses,levels = c("Wood", "Congrete", "Semi-congrete"),labels = c(1, 2, 3))
+
+HouseholdData$Types_of_Houses
+```
+
+```{r}
+#d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
+#is the R code and its output?
+
+
+HouseholdData$Fathers_Occupation <- factor(HouseholdData$Fathers_Occupation,levels = c(1, 2, 3),labels = c("Farmer", "Driver", "Others"))
+
+HouseholdData$Fathers_Occupation
+```
+
+```{r}
+#e. Select only all females respondent that has a father whose occupation is driver. Write
+#the codes and its output.
+
+female_driver <- subset(HouseholdData, Sex == 2 & Fathers_Occupation == "Driver")
+female_driver
+```
+
+```{r}
+#f. Select the respondents that have greater than or equal to 5 number of siblings attending
+#school. Write the codes and its output.
+
+many_siblings <- subset(HouseholdData, Siblings_at_School >= 5)
+many_siblings
+
+
+```
+
+```{r}
+#e. Extract 3rd and 5th row with 2nd and 4th column.
+respondents_data[c(3,5), c(2,4)]
+respondents_data
+```
+
+```{r}
+#f. Select the variable types of houses then store the vector that results as types_houses.
+types_houses <- respondents_data$Types_of_Houses
+types_houses
+```
+
+```{r}
+#g. Select only all Males respondent that their father occupation was farmer.
+all_Males <- subset(respondents_data, Sex == 1 & Fathers_Occupation == 1)
+all_Males
+```
+
+```{r}
 #h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school.
 all_Females <- subset(respondents_data, Sex == 2 & Siblings_at_School >= 5)
 all_Females
 
 ```
+
 ## 2. Write a R program to create an empty data frame. Using the following codes:
 
 ```{r}
@@ -71,19 +195,6 @@ stringsAsFactors=FALSE)
 print("Structure of the empty dataframe:")
 print(str(df))
 
-
-#The Out Put:
-#[1] "Structure of the empty dataframe:"
-#> print(str(df))
-#'data.frame':	0 obs. of  5 variables:
-# $ Ints      : int 
-# $ Doubles   : num 
-# $ Characters: chr 
-#Logicals  : logi 
-# $ Factors   : Factor w/ 0 levels: 
-#NULL
-
-#Does not contain any data
 ```
 
 ## 3. Create a .csv file of this. Save it as HouseholdData.csv
@@ -115,21 +226,26 @@ write.csv(HouseholdData, file = "HouseholdData.csv", row.names = TRUE )
 data_set1 <- read.csv("HouseholdData.csv", header = TRUE)
 data_set1
 
+```
 
+```{r}
 #b. Convert the Sex into factor using factor() function and change it into integer.[Legend:
 #Male = 1 and Female = 2]. Write the R codes and its output.
 
 HouseholdData$Sex <- factor(HouseholdData$Sex, levels = c("Male", "Female"),labels = c(1, 2))
+```
 
 
+```{r}
 #c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
 #= 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
 
 HouseholdData$Types_of_Houses <- factor(HouseholdData$Types_of_Houses,levels = c("Wood", "Congrete", "Semi-congrete"),labels = c(1, 2, 3))
 
 HouseholdData$Types_of_Houses
+```
 
-
+```{r}
 #d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
 #is the R code and its output?
 
@@ -138,14 +254,17 @@ HouseholdData$Fathers_Occupation <- factor(HouseholdData$Fathers_Occupation,leve
 
 HouseholdData$Fathers_Occupation
 
+```
 
+```{r}
 #e. Select only all females respondent that has a father whose occupation is driver. Write
 #the codes and its output.
 
 female_driver <- subset(HouseholdData, Sex == 2 & Fathers_Occupation == "Driver")
 female_driver
+```
 
-
+```{r}
 #f. Select the respondents that have greater than or equal to 5 number of siblings attending
 #school. Write the codes and its output.
 
@@ -155,7 +274,7 @@ many_siblings
 
 ```
 
+```{r}
 ## 4. Interpret the graph.
-
-
 #Based on the results of the graph, negative opinion dominated the use of Twitter between July 14-21, 2020, with high peaks being on July 15 and 21. Throughout the week, the use of tweets that were neutral had a consistent frequency with positive tweets always bearing the lowest frequency. The data shows a clear picture of the platform that the negative thoughts had overwhelmed the positive thoughts considerably during the time.
+```

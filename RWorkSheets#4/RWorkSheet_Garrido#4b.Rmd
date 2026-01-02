@@ -1,0 +1,310 @@
+---
+title: "RWorkSheet#4b"
+author: "ANGELO A. GARRIDO"
+date: "2025-11-13"
+output: pdf_document
+---
+
+```{r}
+
+#1. Using the for loop, create an R script that will display a 5x5 matrix as                                                 
+#shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+
+numbers <- matrix(0, nrow = 5, ncol = 5)
+
+# fill the matrix using for loops
+for (i in 1:5) {
+  for (j in 1:5) {
+    numbers[i, j] <- abs(i - j)
+  }
+}
+numbers
+
+
+
+#2. Print the string "*" using for() function.The output should be the same                                 
+#as shown in Figure
+
+for (i in 1:5) {    
+  for (j in 1:i) {    
+    cat(' "*" ')     
+  }
+  cat("\n")          
+}
+
+
+
+#3. Get an input from the user to print the Fibonacci sequence starting from the                                                
+#1st input  up to 500. Use repeat and break statements.                                                                         
+#Write the R Scripts and its output.
+
+num <- 10
+
+firstnum <- 0
+secnum <- 1
+fib_seq <- c()
+
+repeat {
+  fib <- firstnum + secnum
+  firstnum <- secnum
+  secnum <- fib
+  
+  if (fib >= num) {
+    fib_seq <- c(fib_seq, fib)
+  }
+  
+  if (fib > 500) {
+    break
+  }
+}
+
+print("Fibonacci sequence from 10 to 500:")
+print(fib_seq)
+
+
+```
+
+```{r, fig.width = 4, fig.height = 8}
+#4. Import the dataset as shown in Figure 1 you have created previously.
+
+size <- c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5,13.0,
+          11.5,8.5,5.0,10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,13.0)
+
+height <- c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,64.0,74.5,67.0,71.0
+            ,71.0,77.0,72.0,59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,72.0,70.0
+            ,68.0,70.0)
+
+gender <- c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M","M"
+            , "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M","M","M"
+)
+
+shoesize_Data <- data.frame(size,height,gender)
+names(shoesize_Data) <- c("Size","Height","Gender")
+shoesize_Data
+
+
+
+#a.Import CSV or Excel and display first 6 rows
+
+data <- read.csv("import_march (1).csv") 
+head(data)
+
+
+
+#b. Subset for gender and count observations
+
+
+sub_male <- shoesize_Data[shoesize_Data$Gender == "M", c("Size", "Height")]
+sub_female <- shoesize_Data[shoesize_Data$Gender == "F", c("Size", "Height")]
+
+
+nrow(sub_male)  
+nrow(sub_female) 
+
+
+
+#c. Barplot of males and females
+
+gender_counts <- c(Male = nrow(sub_male), Female = nrow(sub_female))
+
+barplot(gender_counts,
+        main = "Number of Males and Females in a Shoe Data Set",
+        xlab = "Sex",
+        ylab = "Count",
+        col = c("skyblue", "pink"),
+        width = 0.09,
+        ylim = c(1,15),
+        yaxt = "n") 
+
+axis(2, at = seq(1, 15, by = 1), las = 1)
+
+#Output: Barplot with blue for Male, red for Female, shows genders
+
+
+```
+
+
+```{r, fig.width = 6, fig.height = 6}
+#5. The monthly income of Dela Cruz family was spent on the following:
+
+
+#a. Create a piechart that will include labels in percentage
+
+expenses <- c(60,10,5,25)
+names(expenses) <- c("Food","Electricity","Savings","Miscellaneous")
+
+pie(expenses,
+    labels=paste(names(expenses), round(expenses/sum(expenses)*100,1), "%"),
+    col = c("#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4"),
+    main="Monthly Expenses of Dela Cruz Family")
+
+#Output: Pie chart with percentages of Food, Electricity, Savings, Miscellaneous
+
+
+```
+
+```{r fig.width = 13, fig.height= 7}
+#6. Use the iris dataset.
+
+data(iris)
+str(iris)
+
+#Output:
+#'data.frame': 150 obs. of 5 variables
+#$ Sepal.Length: num
+#$ Sepal.Width : num
+#$ Petal.Length: num
+#$ Petal.Width : num
+#$ Species     : Factor w/ 3 levels "setosa","versicolor","virginica"
+
+
+
+#b. Calculate mean of numeric columns
+
+iris_means <- colMeans(iris[,1:4])
+iris_means
+
+# Output:
+# Sepal.Length Sepal.Width Petal.Length Petal.Width 
+#      5.843       3.057       3.758       1.199
+
+
+#c. Pie chart of Species distribution
+
+
+species_count <- table(iris$Species)
+pie(species_count,
+    main="Species Distribution in Iris Dataset",
+    col=c("red","green","blue"),
+    legend.text=TRUE)
+
+#Output: Pie chart showing number of setosa, versicolor, virginica
+
+
+
+#d. Subset species and show last 6 rows
+setosa_iris <- iris[iris$Species=="setosa", ]
+versicolor_iris <- iris[iris$Species=="versicolor", ]
+virginica_iris <- iris[iris$Species=="virginica", ]
+
+tail(setosa_iris)
+# Output: last 6 rows of setosa
+
+tail(versicolor_iris)
+# Output: last 6 rows of versicolor
+
+tail(virginica_iris)
+# Output: last 6 rows of virginica
+
+
+
+#e. Scatterplot of Sepal.Length vs Sepal.Width by Species
+iris$Species <- as.factor(iris$Species)  
+colors <- c("red","green","blue")
+
+plot(iris$Sepal.Length, iris$Sepal.Width,
+     col=colors[iris$Species],
+     pch=19,
+     main="Iris Dataset",
+     sub="Sepal Width and Length",
+     xlab="Sepal Length",
+     ylab="Sepal Width")
+
+legend(x = 7.8, y = 4.8,     # Upper right coordinates
+       legend = levels(iris$Species),
+       col = colors,
+       pch = 19,
+       xpd = TRUE)
+
+# Output: Scatterplot with red=setosa, green=versicolor, blue=virginica
+
+
+#f. Interpret the result.
+#Interpretation: Setosa is compact, Virginica is long/lean, and Versicolor 
+#comfortably sits in between.
+
+
+```
+
+```{r fig.height = 6,fig.width = 8}
+#7. Import the alexa-file.xlsx
+library(readxl)
+library(dplyr)
+
+# Read the Excel file
+alexa_xlsx <- read_excel("alexa-file.xlsx")
+
+# Check the structure and column names
+str(alexa_xlsx)
+colnames(alexa_xlsx)
+
+#a. Rename the white and black variants by using gsub() function.
+# Remove extra whitespaces in black and white variants
+alexa_xlsx$variation <- gsub("Black\\s+", "Black ", alexa_xlsx$variation)
+alexa_xlsx$variation <- gsub("White\\s+", "White ", alexa_xlsx$variation)
+
+# Snippet of the cleaned variation column
+head(alexa_xlsx$variation)
+
+# Show snippet of cleaned variations (you would replace this with your actual image path)
+# knitr::include_graphics("path/to/your/snippet/image.png")
+
+#b. Get the total number of each variations and save it into another object.
+variations <- alexa_xlsx %>% count(variation)
+variations
+
+# Save the object as variations.RData
+save(variations, file = "variations.RData")
+
+#c. From the variations.RData, create a barplot()
+load("variations.RData")
+
+# Create barplot with all variations
+barplot(variations$n,
+        names.arg = variations$variation,
+        col = rainbow(length(variations$n)),
+        main = "Total Number of Alexa Variations",
+        xlab = "Variation Type",
+        ylab = "Total Count",
+        las = 2,
+        cex.names = 0.7,
+        ylim = c(-0.1, max(variations$n) * 1.15)
+        ,mgp = c(4, 1, 0))
+
+#d. Create barplot() for black and white variations side by side
+# Filter black and white variations
+black_variations <- variations[grep("Black", variations$variation), ]
+white_variations <- variations[grep("White", variations$variation), ]
+
+# Set up side-by-side plot
+par(mfrow = c(1, 2))
+
+# Black variations barplot
+barplot(black_variations$n,
+        names.arg = black_variations$variation,
+        col = "black",
+        main = "Black Alexa Variations",
+        ylab = "Count",
+        las = 2,
+        cex.names = 0.8)
+
+# White variations barplot
+barplot(white_variations$n,
+        names.arg = white_variations$variation,
+        col = "gray",
+        main = "White Alexa Variations", 
+        ylab = "Count",
+        las = 2,
+        cex.names = 0.8)
+
+
+# Reset plot parameters
+par(mfrow = c(1, 1))
+
+
+```
+
+
+
+
+
